@@ -6,6 +6,10 @@ const state = {
   revealed: false,
   schedule: null,
   activeDay: null,
+  isLoading: true,
+  loadedImages: new Set(),
+  loadToken: 0,
+  pendingIndex: 0,
   theme: localStorage.getItem('quiz-theme') || 'dark',
 }
 
@@ -17,6 +21,7 @@ const els = {
   answerText: document.querySelector('#answer-text'),
   choices: document.querySelector('#choices'),
   handImage: document.querySelector('#hand-image'),
+  loadingLabel: document.querySelector('#loading-label'),
   modeHand: document.querySelector('#mode-hand'),
   modeTrivia: document.querySelector('#mode-trivia'),
   nextButton: document.querySelector('#next-button'),
@@ -24,9 +29,12 @@ const els = {
   progressGrid: document.querySelector('#progress-grid'),
   questionCount: document.querySelector('#question-count'),
   questionText: document.querySelector('#question-text'),
+  quizStage: document.querySelector('.quiz-stage'),
   revealButton: document.querySelector('#reveal-button'),
   themeToggle: document.querySelector('#theme-toggle'),
 }
+
+const MIN_LOADING_MS = 140
 
 function getBeijingDateKey(date = new Date()) {
   const parts = new Intl.DateTimeFormat('en-US', {
@@ -64,6 +72,37 @@ function currentBlock() {
   return state.mode === 'hand' ? item.hand : item.trivia
 }
 
+function wait(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms)
+  })
+}
+
+function loadImage(src) {
+  if (state.loadedImages.has(src)) return Promise.resolve()
+
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => {
+      state.loadedImages.add(src)
+      resolve()
+    }
+    image.onerror = reject
+    image.src = src
+  })
+}
+
+function warmImage(index) {
+  const item = state.items[index]
+  if (!item) return
+  loadImage(item.hand.imageUrl).catch(() => {})
+}
+
+function warmAdjacentImages() {
+  warmImage(state.index - 1)
+  warmImage(state.index + 1)
+}
+
 function setTheme(theme) {
   state.theme = theme
   document.documentElement.dataset.theme = theme
@@ -73,20 +112,42 @@ function setTheme(theme) {
 function renderProgress() {
   els.progressGrid.innerHTML = ''
   state.items.forEach((item, index) => {
+    const currentIndex = state.isLoading ? state.pendingIndex : state.index
     const button = document.createElement('button')
     button.className = 'progress-cell'
     button.type = 'button'
     button.textContent = index + 1
     button.setAttribute('aria-label', `第 ${index + 1} 题`)
-    if (index === state.index) button.classList.add('is-current')
+    button.disabled = state.isLoading
+    if (index === currentIndex) button.classList.add('is-current')
     if (index < state.index) button.classList.add('is-seen')
     button.addEventListener('click', () => {
-      state.index = index
-      state.revealed = false
-      render()
+      showQuestion(index)
     })
     els.progressGrid.append(button)
   })
+}
+
+function renderLoading(index) {
+  state.isLoading = true
+  state.pendingIndex = index
+  els.quizStage.classList.add('is-loading')
+  els.quizStage.setAttribute('aria-busy', 'true')
+  els.loadingLabel.textContent = `载入第 ${index + 1} 题...`
+  els.questionCount.textContent = `${index + 1} / ${state.items.length}`
+  els.handImage.removeAttribute('src')
+  els.handImage.alt = ''
+  els.questionText.textContent = ''
+  els.choices.hidden = true
+  els.choices.innerHTML = ''
+  els.answerPanel.hidden = true
+  els.revealButton.textContent = '显示答案'
+  els.prevButton.disabled = true
+  els.nextButton.disabled = true
+  els.revealButton.disabled = true
+  els.modeHand.disabled = true
+  els.modeTrivia.disabled = true
+  renderProgress()
 }
 
 function renderChoices(block) {
@@ -124,29 +185,52 @@ function renderAnswer(block) {
 }
 
 function setMode(mode) {
+  if (state.isLoading) return
   state.mode = mode
   state.revealed = false
   render()
 }
 
 function go(delta) {
+  if (state.isLoading) return
   const nextIndex = state.index + delta
-  if (nextIndex < 0 || nextIndex >= state.items.length) return
-  state.index = nextIndex
+  showQuestion(nextIndex)
+}
+
+async function showQuestion(index) {
+  if (index < 0 || index >= state.items.length) return
+
+  const item = state.items[index]
+  const token = state.loadToken + 1
+  state.loadToken = token
+  renderLoading(index)
+
+  await Promise.all([loadImage(item.hand.imageUrl).catch(() => {}), wait(MIN_LOADING_MS)])
+  if (token !== state.loadToken) return
+
+  state.index = index
+  state.pendingIndex = index
   state.revealed = false
   render()
+  warmAdjacentImages()
 }
 
 function render() {
   const item = currentItem()
   const block = currentBlock()
 
+  state.isLoading = false
+  els.quizStage.classList.remove('is-loading')
+  els.quizStage.setAttribute('aria-busy', 'false')
   els.questionCount.textContent = `${state.index + 1} / ${state.items.length}`
   els.handImage.src = item.hand.imageUrl
   els.handImage.alt = `第 ${state.index + 1} 题手牌`
   els.questionText.textContent = block.prompt
   els.prevButton.disabled = state.index === 0
   els.nextButton.disabled = state.index === state.items.length - 1
+  els.revealButton.disabled = false
+  els.modeHand.disabled = false
+  els.modeTrivia.disabled = false
   els.modeHand.classList.toggle('is-active', state.mode === 'hand')
   els.modeTrivia.classList.toggle('is-active', state.mode === 'trivia')
   els.modeHand.setAttribute('aria-selected', state.mode === 'hand')
@@ -188,15 +272,19 @@ async function init() {
     if (event.key === 'ArrowRight') go(1)
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
+      if (state.isLoading) return
       state.revealed = !state.revealed
       render()
     }
   })
 
-  render()
+  await showQuestion(0)
 }
 
 init().catch((error) => {
+  state.isLoading = false
+  els.quizStage.classList.remove('is-loading')
+  els.quizStage.setAttribute('aria-busy', 'false')
   els.questionText.textContent = '数据加载失败'
   console.error(error)
 })

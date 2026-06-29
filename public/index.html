@@ -22,7 +22,7 @@
         <div class="progress-grid" id="progress-grid"></div>
       </section>
 
-      <section class="quiz-stage" aria-live="polite">
+      <section class="quiz-stage is-loading" aria-live="polite" aria-busy="true">
         <div class="meta-row">
           <span id="question-count">1 / 4</span>
         </div>
@@ -52,6 +52,14 @@
           <p class="answer-text" id="answer-text"></p>
           <p class="answer-summary" id="answer-summary"></p>
           <p class="answer-note" id="answer-note" hidden></p>
+        </div>
+
+        <div class="stage-loader" id="stage-loader" role="status" aria-live="polite">
+          <div class="loader-card">
+            <span class="loader-mark" aria-hidden="true">🀄️</span>
+            <span id="loading-label">载入题目...</span>
+            <span class="loading-bar" aria-hidden="true"></span>
+          </div>
         </div>
       </section>
     </main>

@@ -1,0 +1,440 @@
+{
+  "title": "小林刚一眼何切",
+  "description": "从 Bilibili 问题篇与答案篇整理出的 24 组何切题与 24 组麻雀豆知识。长解释已改写为网页展示用短摘要，来源见 source_manifest.json。",
+  "items": [
+    {
+      "id": 1,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/16d8f30c3d9645cf847fe157eec9b0ac01610727.png",
+        "prompt": "在北和中之间选择一张切牌。",
+        "answer": "打中",
+        "summary": "这手还缺雀头，保留北摸成对子后有平和路线，因此先处理役牌中。"
+      },
+      "trivia": {
+        "prompt": "表示第 X 回合的日麻标准写法是哪一个？",
+        "choices": [
+          "巡目",
+          "顺目"
+        ],
+        "answer": "巡目",
+        "summary": "第 X 巡的标准写法是「巡目」。"
+      }
+    },
+    {
+      "id": 2,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/3ab2aa9a5c5035217ba77aaa2d897b2188d52850.png",
+        "prompt": "比较 1m 与 2p，选出更应舍弃的一张。",
+        "answer": "打2p",
+        "summary": "留下 1m 的后续变化更多，摸 4m 也能推进；2p 的价值主要只剩再成对子。"
+      },
+      "trivia": {
+        "prompt": "开局后四家面前牌山整体的正式名称是什么？",
+        "choices": [
+          "城郭牌",
+          "城壁牌"
+        ],
+        "answer": "城壁牌",
+        "summary": "整座牌山称为城壁牌，单列牌山则是壁牌。"
+      }
+    },
+    {
+      "id": 3,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/0ef2dcaad0ca8d8176885530275c994e17e7ae99.png",
+        "prompt": "在 5m 和 9m 之间判断哪张更应切。",
+        "answer": "打9m",
+        "summary": "单看对子可能想留 9m，但 5m 周边的 3/4/6/7m 后续变化更重要。"
+      },
+      "trivia": {
+        "prompt": "无副露状态的标准术语写法是哪一个？",
+        "choices": [
+          "门前清",
+          "面前清"
+        ],
+        "answer": "门前清",
+        "summary": "没有副露牌摆在门前，故称门前清，常略作门清。"
+      }
+    },
+    {
+      "id": 4,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/430a68dbe1f2b82e39fdefdd957b32dbd3eb0c88.png",
+        "prompt": "从 7m、北、中里选一张先切。",
+        "answer": "打北",
+        "summary": "当前手役方向还不明确，役牌中成对仍有价值，北的功能最低。"
+      },
+      "trivia": {
+        "prompt": "两张牌只差一张即可成顺子的组合，应写作哪一个？",
+        "choices": [
+          "搭子",
+          "塔子"
+        ],
+        "answer": "搭子",
+        "summary": "搭子表示相连、组合的两牌形，不是建筑物的塔。",
+        "note": "答案篇写作“B.搭子”，但问题篇里“搭子”为 A，已按术语内容归一。"
+      }
+    },
+    {
+      "id": 5,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/ba0a6af3e073e812e1b56a4bc8caccd6a6d684a9.png",
+        "prompt": "万子上段形和饼子形之间，优先处理哪边？",
+        "answer": "打7p",
+        "summary": "万子的 788899 仍含多种发展，先固定饼子的两面形，暂时放弃三暗刻可能。"
+      },
+      "trivia": {
+        "prompt": "自己摸牌和了的标准写法是哪一个？",
+        "choices": [
+          "自摸",
+          "自模"
+        ],
+        "answer": "自摸",
+        "summary": "这里用提手旁的「摸」。"
+      }
+    },
+    {
+      "id": 6,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/07222c4fa9c633125b5009d0b69983b75cdafbf1.png",
+        "prompt": "两面搭子不少，找出最合适的切牌。",
+        "answer": "打4m",
+        "summary": "保留 147p、14s 和暗刻听牌变化更强；保留所有好形反而未必能听牌。"
+      },
+      "trivia": {
+        "prompt": "荣和别人加杠的役种标准写法是哪一个？",
+        "choices": [
+          "抢杠",
+          "枪杠"
+        ],
+        "answer": "抢杠",
+        "summary": "这里是夺取之意，应写提手旁的抢。"
+      }
+    },
+    {
+      "id": 7,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/486f0d903c6223fbc8b769eabbee035fbbee5fe0.png",
+        "prompt": "饼子切哪张后立直更优？",
+        "answer": "打4p立直",
+        "summary": "4p 与 5p 的听牌枚数相同，但打 4p 可以确定断幺，整体更佳。"
+      },
+      "trivia": {
+        "prompt": "表示一二位相关概念的标准写法是哪一个？",
+        "choices": [
+          "连带",
+          "连对",
+          "连体"
+        ],
+        "answer": "连对",
+        "summary": "连对源自赛马术语，后被借入麻将语境。"
+      }
+    },
+    {
+      "id": 8,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/84400c96d70eb7e2c9a673becfc7784443f86a39.png",
+        "prompt": "与上一题相似，判断这次饼子该切哪张立直。",
+        "answer": "打5p立直",
+        "summary": "此手已经没有断幺，听牌枚数相同时，选择更容易荣和的 147p。"
+      },
+      "trivia": {
+        "prompt": "开杠补牌后自摸和了的日麻役名写法是哪一个？",
+        "choices": [
+          "岭上开花",
+          "杠上开花"
+        ],
+        "answer": "岭上开花",
+        "summary": "日麻汉字写作岭上开花；杠上开花是国标常见写法。"
+      }
+    },
+    {
+      "id": 9,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/4a37f759d31e52eb4e400520673f9187af5dd653.png",
+        "prompt": "索子一气已经可见，选择当前更合适的舍牌。",
+        "answer": "打1s",
+        "summary": "打 2s 能保暗刻变化，但打 1s 后摸 3s 可直接进入平和听牌。"
+      },
+      "trivia": {
+        "prompt": "场上尚未出现过的牌，应称为什么？",
+        "choices": [
+          "初牌",
+          "生牌"
+        ],
+        "answer": "生牌",
+        "summary": "牌河里还未露面的牌称为生牌。"
+      }
+    },
+    {
+      "id": 10,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/e11b0d61826dce92dfb8512da054303f93fb407f.png",
+        "prompt": "从未来听牌形出发，判断应瞄准哪条路线。",
+        "answer": "打8m",
+        "summary": "只看直接听牌会偏向 4s，但保留索子延伸后可把 6m 当雀头转断平。"
+      },
+      "trivia": {
+        "prompt": "俗称最后一张牌的正式说法是哪一个？",
+        "choices": [
+          "零牌",
+          "终牌"
+        ],
+        "answer": "零牌",
+        "summary": "最后一枚通常称作零牌。"
+      }
+    },
+    {
+      "id": 11,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/374ea24390e143fe88ed7d6ba62be4ad5673eb3e.png",
+        "prompt": "同时看当前进张和后续变化，选择要拆掉的部分。",
+        "answer": "打1m",
+        "summary": "这是 6 block 状态，必须削掉一个面子候补，最弱的是 1m 对子。"
+      },
+      "trivia": {
+        "prompt": "日麻里条子花色的标准汉字是哪一个？",
+        "choices": [
+          "索子",
+          "条子"
+        ],
+        "answer": "索子",
+        "summary": "日麻汉字写作索子，条子是国标等语境常见叫法。"
+      }
+    },
+    {
+      "id": 12,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/9581b9a8a38bb46b5807701e7aa9165f0015be9a.png",
+        "prompt": "与上一题相似，继续判断 6 block 中该拆哪组。",
+        "answer": "打12p",
+        "summary": "同样需要削掉一组面子候补，12p 是最弱的一组，早拆更顺。"
+      },
+      "trivia": {
+        "prompt": "把牌山向前移动的动作叫什么？",
+        "choices": [
+          "推牌",
+          "押牌"
+        ],
+        "answer": "推牌",
+        "summary": "正式叫法是推牌。"
+      }
+    },
+    {
+      "id": 13,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/194d96dcad0dcc33244126db8103fe961531744d.png",
+        "prompt": "尽量不损失任何可能面子时，应先切哪张？",
+        "answer": "打1p",
+        "summary": "1244p 很难做两面子，孤张 7m 和 3s 仍可靠张发展，先从 244p 取一面。"
+      },
+      "trivia": {
+        "prompt": "役满九莲宝灯的标准写法是哪一个？",
+        "choices": [
+          "九连宝灯",
+          "九莲宝灯"
+        ],
+        "answer": "九莲宝灯",
+        "summary": "标准写法为九莲宝灯，现代规则不限于万子。"
+      }
+    },
+    {
+      "id": 14,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/939f65d56702f8bc5af33b6353440f1a03413454.png",
+        "prompt": "找出这副手牌中功能最低的一张。",
+        "answer": "打4p",
+        "summary": "1124p 不必强做两面子，保留 112p 不损 3p，后续也可转断平。"
+      },
+      "trivia": {
+        "prompt": "平场的原义是什么？",
+        "choices": [
+          "各家点数比较平均的状况",
+          "0本场"
+        ],
+        "answer": "0本场",
+        "summary": "现在常被借指点差平均，但原义是 0 本场。"
+      }
+    },
+    {
+      "id": 15,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/711cd2ab39fb0a42253db7ee1021554919625fbd.png",
+        "prompt": "在保留雀头与保留面子之间取舍。",
+        "answer": "打1m",
+        "summary": "看似缺雀头，但 78m34999p 的听牌进张很广，1123m 只当一个面子看。"
+      },
+      "trivia": {
+        "prompt": "靠张听牌实际描述的是哪种状态？",
+        "choices": [
+          "孤张若靠上周边牌即可听牌的一向听",
+          "孤张已经靠上周边牌并听牌"
+        ],
+        "answer": "孤张若靠上周边牌即可听牌的一向听",
+        "summary": "名字含听牌，但它本质上说的是一向听状态。"
+      }
+    },
+    {
+      "id": 16,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/bd6c0f5842122a453e4a4c4a21c9c3dff652ecd1.png",
+        "prompt": "三色路线和最大进张之间怎样取舍？",
+        "answer": "打3s",
+        "summary": "固定 456 三色后，摸 2-7m 与 3-9p 都能听牌，进张面更宽。"
+      },
+      "trivia": {
+        "prompt": "立直一发巡内抢杠荣和，是否仍算一发？",
+        "choices": [
+          "算一发",
+          "不算一发"
+        ],
+        "answer": "算一发",
+        "summary": "此时按加杠不成立处理，所以一发保留。"
+      }
+    },
+    {
+      "id": 17,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/9728c5df477d89e086887c5f352d9df0aa2419ef.png",
+        "prompt": "已副露中中中时，为最快听牌该如何处理？",
+        "answer": "打5p",
+        "summary": "打 5s 或 6s 会把形状固定死；打 5p 后饼子和索子的多张进张都可听牌。"
+      },
+      "trivia": {
+        "prompt": "有人加杠被抢杠荣和时，会不会翻新宝牌？",
+        "choices": [
+          "翻新宝牌",
+          "不翻新宝牌"
+        ],
+        "answer": "不翻新宝牌",
+        "summary": "抢杠时杠不成立，因此通常不翻新宝牌。"
+      }
+    },
+    {
+      "id": 18,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/757fdf080a0835397a5c1add69122c9b69d0deb2.png",
+        "prompt": "重视平和，还是保留更广的听牌进张？",
+        "answer": "打6p",
+        "summary": "留 6p 只在摸 5p 时有用；打 6p 保留更多听牌进张，也仍有平和三色可能。"
+      },
+      "trivia": {
+        "prompt": "掷骰后亲家开始取配牌的动作叫什么？",
+        "choices": [
+          "开门",
+          "破门"
+        ],
+        "answer": "开门",
+        "summary": "这个动作称为开门。"
+      }
+    },
+    {
+      "id": 19,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/3928505c082a922a41d54e8ed211990a2c0a1df0.png",
+        "prompt": "在固定两面与固定对子之间做选择。",
+        "answer": "打4p",
+        "summary": "打 7m 会损 4 枚 8m，打 4p 只损 2 枚 4p，损失更小。"
+      },
+      "trivia": {
+        "prompt": "宝牌的正式名称是哪一个？",
+        "choices": [
+          "当选牌",
+          "悬赏牌"
+        ],
+        "answer": "悬赏牌",
+        "summary": "宝牌较正式的旧称是悬赏牌。"
+      }
+    },
+    {
+      "id": 20,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/33ec37020b207314b84d2bd13f3fba9ee20f3dfe.png",
+        "prompt": "比较 7m 与 2p 的差别，选出更好的切牌。",
+        "answer": "打2p",
+        "summary": "两者直接损失相近，但打 2p 后摸 6m 或 5p 能形成两面，后续更好。"
+      },
+      "trivia": {
+        "prompt": "亲家的正式名称是哪一个？",
+        "choices": [
+          "庄家",
+          "散家"
+        ],
+        "answer": "庄家",
+        "summary": "亲家称庄家，子家对应散家。"
+      }
+    },
+    {
+      "id": 21,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/005f8359dbae28e56a565d1c9108bcadec6af488.png",
+        "prompt": "逐项比较会损失的进张枚数后选择切牌。",
+        "answer": "打7s",
+        "summary": "打 2p 或 3p 都会损较多进张；打 7s 固定两面时只损 2 枚 7s。"
+      },
+      "trivia": {
+        "prompt": "场风的正式名称是哪一个？",
+        "choices": [
+          "圈风",
+          "门风"
+        ],
+        "answer": "圈风",
+        "summary": "场风正式称圈风，自风则称门风。"
+      }
+    },
+    {
+      "id": 22,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/872c182f3826656bed75f90d0290283c29d3a671.png",
+        "prompt": "记住这个经典形状，并判断该切哪张。",
+        "answer": "打4p",
+        "summary": "134556m 看似 1m 闲置，其实进 2m 可成平和，先打 4p 固定两面。"
+      },
+      "trivia": {
+        "prompt": "有先付规则在这里指什么？",
+        "choices": [
+          "不允许后付和牌或后付行为",
+          "允许后付和牌和后付行为"
+        ],
+        "answer": "允许后付和牌和后付行为",
+        "summary": "先付一词有相反用法；此处有先付按允许后付理解。"
+      }
+    },
+    {
+      "id": 23,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/b78ec2a24b3a4ef153500e71600984ffa2e7624c.png",
+        "prompt": "在拆 2m 对子与 2p 对子之间，观察剩余形状后选择。",
+        "answer": "打2p",
+        "summary": "245667 不只有 58 进张，还有容易忽略的 3；因此先拆一张 2p。"
+      },
+      "trivia": {
+        "prompt": "哪一种立直后暗杠情形属于送杠？",
+        "choices": [
+          "111123s34p78999m 立直后摸 4s，暗杠 1s",
+          "123p777888999m1s 立直后摸 9m，暗杠 9m"
+        ],
+        "answer": "111123s34p78999m 立直后摸 4s，暗杠 1s",
+        "summary": "送杠指立直后摸到一张却去杠另一种牌的行为，一般不允许。"
+      }
+    },
+    {
+      "id": 24,
+      "hand": {
+        "imageUrl": "https://i0.hdslb.com/bfs/article/b2f6791d46468f0a8f86f4cdc2b94c58b4be8443.png",
+        "prompt": "与第 22 问相似，但这次要把手役因素纳入判断。",
+        "answer": "打1m",
+        "summary": "比起 2m 的平和进张，这里更想要 48p 的断幺进张，所以先打 1m。"
+      },
+      "trivia": {
+        "prompt": "亲家第一巡暗杠后岭上自摸，算不算天和？",
+        "choices": [
+          "算天和",
+          "不算天和"
+        ],
+        "answer": "不算天和",
+        "summary": "第一巡发生吃碰杠后，不再按天和或地和处理。"
+      }
+    }
+  ]
+}

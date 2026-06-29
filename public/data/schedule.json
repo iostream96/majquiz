@@ -1,0 +1,27 @@
+{
+  "timezone": "Asia/Shanghai",
+  "startDate": "2026-06-29",
+  "dailySize": 4,
+  "days": [
+    {
+      "date": "2026-06-29",
+      "title": "Day 1",
+      "questionIds": [
+        1,
+        4,
+        2,
+        3
+      ]
+    },
+    {
+      "date": "2026-06-30",
+      "title": "Day 2",
+      "questionIds": [
+        6,
+        11,
+        12,
+        7
+      ]
+    }
+  ]
+}

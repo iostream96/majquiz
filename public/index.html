@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>小林刚一眼何切 Quiz</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell" aria-labelledby="app-title">
+      <header class="topbar">
+        <div>
+          <p class="kicker">Kobayashi Go</p>
+          <h1 id="app-title">一眼何切</h1>
+        </div>
+        <button class="theme-button" id="theme-toggle" type="button" aria-label="切换配色">◐</button>
+      </header>
+
+      <section class="progress-strip" aria-label="题目进度">
+        <div class="progress-grid" id="progress-grid"></div>
+      </section>
+
+      <section class="quiz-stage" aria-live="polite">
+        <div class="meta-row">
+          <span id="question-count">Q1 / 4</span>
+          <span id="review-state">北京时间</span>
+        </div>
+
+        <div class="daily-row">
+          <span id="daily-title">今日题组</span>
+          <span id="daily-date">Asia/Shanghai</span>
+        </div>
+
+        <nav class="controls" aria-label="题目导航">
+          <button class="nav-button" id="prev-button" type="button">上一题</button>
+          <button class="reveal-button" id="reveal-button" type="button">显示答案</button>
+          <button class="nav-button" id="next-button" type="button">下一题</button>
+        </nav>
+
+        <div class="hand-frame">
+          <img id="hand-image" alt="">
+        </div>
+
+        <div class="mode-tabs" role="tablist" aria-label="题型">
+          <button class="tab is-active" id="mode-hand" type="button" role="tab" aria-selected="true">何切</button>
+          <button class="tab" id="mode-trivia" type="button" role="tab" aria-selected="false">豆知识</button>
+        </div>
+
+        <div class="question-panel">
+          <p class="question-text" id="question-text"></p>
+          <div class="choices" id="choices" hidden></div>
+        </div>
+
+        <div class="answer-panel" id="answer-panel" hidden>
+          <p class="answer-label">答案</p>
+          <p class="answer-text" id="answer-text"></p>
+          <p class="answer-summary" id="answer-summary"></p>
+          <p class="answer-note" id="answer-note" hidden></p>
+        </div>
+      </section>
+
+      <footer class="source-line">
+        <a href="https://www.bilibili.com/opus/454185425690831265" rel="noreferrer" target="_blank">问题篇</a>
+        <span aria-hidden="true">/</span>
+        <a href="https://www.bilibili.com/opus/454439601848010206" rel="noreferrer" target="_blank">答案篇</a>
+      </footer>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

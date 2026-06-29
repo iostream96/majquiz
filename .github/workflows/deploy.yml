@@ -1,0 +1,102 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+# Required GitHub Actions configuration:
+# Secrets:
+#   - DEPLOY_SSH_KEY: SSH private key for jumpbox and dockervm
+# Variables:
+#   - DEPLOY_HOST: target Docker host, e.g. 192.168.0.138
+#   - DEPLOY_USER: target SSH user, e.g. yomikaede
+#   - DEPLOY_PORT: target SSH port, default 22
+#   - DEPLOY_PATH: target directory under home, default majquiz
+#   - DEPLOY_PROXY_HOST: public jumpbox endpoint, e.g. 8.219.104.58
+#   - DEPLOY_PROXY_USER: jumpbox SSH user, e.g. yomikaede
+#   - DEPLOY_PROXY_PORT: jumpbox SSH port, e.g. 8622
+#   - MAJQUIZ_PORT: Docker host port, default 8090
+
+permissions:
+  contents: read
+
+jobs:
+  quality-checks:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate JavaScript syntax
+        run: |
+          node -c public/app.js
+          node -c scripts/build_public_data.mjs
+
+      - name: Validate quiz data and assets
+        run: |
+          node -e "const fs=require('fs'); const q=JSON.parse(fs.readFileSync('public/data/quiz.json','utf8')); if(q.items.length!==24) throw new Error('expected 24 items'); for (const item of q.items) { if(!fs.existsSync('public/'+item.hand.imageUrl)) throw new Error('missing '+item.hand.imageUrl); } const s=JSON.parse(fs.readFileSync('public/data/schedule.json','utf8')); if(s.days.length < 1) throw new Error('missing schedule'); console.log('quiz data ok')"
+
+  deploy:
+    name: Deploy to Docker Host
+    needs: quality-checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Clear and recreate deploy directory
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.DEPLOY_HOST }}
+          username: ${{ vars.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ vars.DEPLOY_PORT || '22' }}
+          proxy_host: ${{ vars.DEPLOY_PROXY_HOST }}
+          proxy_username: ${{ vars.DEPLOY_PROXY_USER }}
+          proxy_key: ${{ secrets.DEPLOY_SSH_KEY }}
+          proxy_port: ${{ vars.DEPLOY_PROXY_PORT || '22' }}
+          script: |
+            set -e
+            DEPLOY_DIR=~/${{ vars.DEPLOY_PATH || 'majquiz' }}
+            rm -rf "$DEPLOY_DIR"
+            mkdir -p "$DEPLOY_DIR"
+
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ vars.DEPLOY_HOST }}
+          username: ${{ vars.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ vars.DEPLOY_PORT || '22' }}
+          proxy_host: ${{ vars.DEPLOY_PROXY_HOST }}
+          proxy_username: ${{ vars.DEPLOY_PROXY_USER }}
+          proxy_key: ${{ secrets.DEPLOY_SSH_KEY }}
+          proxy_port: ${{ vars.DEPLOY_PROXY_PORT || '22' }}
+          source: "public/,Dockerfile,docker-compose.yml,.dockerignore"
+          target: "~/${{ vars.DEPLOY_PATH || 'majquiz' }}"
+
+      - name: Build image and restart service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.DEPLOY_HOST }}
+          username: ${{ vars.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ vars.DEPLOY_PORT || '22' }}
+          proxy_host: ${{ vars.DEPLOY_PROXY_HOST }}
+          proxy_username: ${{ vars.DEPLOY_PROXY_USER }}
+          proxy_key: ${{ secrets.DEPLOY_SSH_KEY }}
+          proxy_port: ${{ vars.DEPLOY_PROXY_PORT || '22' }}
+          script: |
+            set -e
+            DEPLOY_DIR=~/${{ vars.DEPLOY_PATH || 'majquiz' }}
+            cd "$DEPLOY_DIR"
+            MAJQUIZ_IMAGE=majquiz:${{ github.sha }} MAJQUIZ_PORT=${{ vars.MAJQUIZ_PORT || '8090' }} docker compose up -d --build --force-recreate
+            docker image prune -f
+            docker compose ps

@@ -1,0 +1,9 @@
+services:
+  majquiz:
+    image: ${MAJQUIZ_IMAGE:-majquiz:local}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${MAJQUIZ_PORT:-8090}:80"

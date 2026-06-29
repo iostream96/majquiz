@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality-checks:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate JavaScript syntax
+        run: |
+          node -c public/app.js
+          node -c scripts/build_public_data.mjs
+
+      - name: Validate quiz data and assets
+        run: |
+          node -e "const fs=require('fs'); const q=JSON.parse(fs.readFileSync('public/data/quiz.json','utf8')); if(q.items.length!==24) throw new Error('expected 24 items'); for (const item of q.items) { if(!fs.existsSync('public/'+item.hand.imageUrl)) throw new Error('missing '+item.hand.imageUrl); } const s=JSON.parse(fs.readFileSync('public/data/schedule.json','utf8')); if(s.days.length < 1) throw new Error('missing schedule'); console.log('quiz data ok')"

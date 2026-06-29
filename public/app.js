@@ -16,8 +16,6 @@ const els = {
   answerSummary: document.querySelector('#answer-summary'),
   answerText: document.querySelector('#answer-text'),
   choices: document.querySelector('#choices'),
-  dailyDate: document.querySelector('#daily-date'),
-  dailyTitle: document.querySelector('#daily-title'),
   handImage: document.querySelector('#hand-image'),
   modeHand: document.querySelector('#mode-hand'),
   modeTrivia: document.querySelector('#mode-trivia'),
@@ -27,7 +25,6 @@ const els = {
   questionCount: document.querySelector('#question-count'),
   questionText: document.querySelector('#question-text'),
   revealButton: document.querySelector('#reveal-button'),
-  reviewState: document.querySelector('#review-state'),
   themeToggle: document.querySelector('#theme-toggle'),
 }
 
@@ -79,8 +76,8 @@ function renderProgress() {
     const button = document.createElement('button')
     button.className = 'progress-cell'
     button.type = 'button'
-    button.textContent = item.id
-    button.setAttribute('aria-label', `第 ${item.id} 题`)
+    button.textContent = index + 1
+    button.setAttribute('aria-label', `第 ${index + 1} 题`)
     if (index === state.index) button.classList.add('is-current')
     if (index < state.index) button.classList.add('is-seen')
     button.addEventListener('click', () => {
@@ -116,7 +113,6 @@ function renderChoices(block) {
 function renderAnswer(block) {
   els.answerPanel.hidden = !state.revealed
   els.revealButton.textContent = state.revealed ? '隐藏答案' : '显示答案'
-  els.reviewState.textContent = state.revealed ? '已揭示' : '审阅模式'
 
   if (!state.revealed) return
 
@@ -145,11 +141,9 @@ function render() {
   const item = currentItem()
   const block = currentBlock()
 
-  els.questionCount.textContent = `${state.index + 1} / ${state.items.length} · Q${item.id}`
-  els.dailyTitle.textContent = state.activeDay?.title || '未配置题组'
-  els.dailyDate.textContent = `${state.activeDay?.date || getBeijingDateKey()} · 北京时间`
+  els.questionCount.textContent = `${state.index + 1} / ${state.items.length}`
   els.handImage.src = item.hand.imageUrl
-  els.handImage.alt = `第 ${item.id} 题手牌`
+  els.handImage.alt = `第 ${state.index + 1} 题手牌`
   els.questionText.textContent = block.prompt
   els.prevButton.disabled = state.index === 0
   els.nextButton.disabled = state.index === state.items.length - 1
